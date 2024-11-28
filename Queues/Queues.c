@@ -1,11 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX 10
+
 struct kuyruk {
-    char elemanlar[10];
+    char elemanlar[MAX];
     int front, rear;
 
 };
+
+void init(struct kuyruk* q) {
+    q->front = 0;
+    q->rear = -1;
+    
+}
+
+int empty(struct kuyruk* q)
+{
+    return ((q->front == q->rear) ? 1 : 0);
+}
+
+int remove(struct kuyruk* q)
+{
+    if (empty(q)) {
+        printf("Queue underflow");
+        exit(1);
+    }
+    if (q->front == MAX - 1)
+        q->front = 0;
+    else
+        (q->front)++;
+    return (q->elemanlar[q->front]);
+}
+int insert(struct kuyruk* q, int x)
+{
+    if (q->rear == MAX - 1)
+        q->rear == 0;
+    else
+        (q->rear)++;
+    if (q->rear == q->front) {
+        printf("Queue overflow");
+        exit(1);
+    }
+    q->elemanlar[q->rear] = x;
+    return;
+}
 
 
 void menu() {
@@ -27,6 +66,11 @@ int main(void) {
     int secim = 0;
 
     do {
+        
+        struct kuyruk k;
+        init(&k);
+        k.front = k.rear = MAX - 1;
+        
         menu();
         scanf_s("%d", &secim);
 
@@ -41,7 +85,9 @@ int main(void) {
 
         }
         else {
-            secim == 4;
+            
+            secim = 4;
+            
         }
 
 
